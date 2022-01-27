@@ -5,13 +5,8 @@ import org.springframework.stereotype.Component
 
 @Component
 @RequiredArgsConstructor
-class DollarCalculator(val marketApi: MarketApi) : ICalculator {
+class WonCalculator(val marketApi: MarketApi): ICalculator {
     var price:Int = 1;
-
-    override fun init(){
-        println("init dollar calculator")
-        this.price = marketApi.connect()
-    }
 
     override fun sum(x: Int, y: Int): Int {
         return (x*price) + (y*price)
@@ -19,6 +14,11 @@ class DollarCalculator(val marketApi: MarketApi) : ICalculator {
 
     override fun minus(x: Int, y: Int): Int {
         return (x*price) - (y*price)
+    }
+
+    override fun init() {
+        println("init won calculator")
+        this.price = 1
     }
 
 }
