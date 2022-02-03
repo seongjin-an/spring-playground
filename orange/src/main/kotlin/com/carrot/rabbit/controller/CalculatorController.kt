@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.*
 @RequiredArgsConstructor
 class CalculatorController(
     private var calculator: Calculator
-){
+) {
     @Autowired
     private lateinit var wonCalculator: WonCalculator
+
     @Autowired
     private lateinit var dollarCalculator: DollarCalculator
 
     @GetMapping("sum")
-    fun sum(@RequestParam x:Int, @RequestParam y:Int):Int{
+    fun sum(@RequestParam x: Int, @RequestParam y: Int): Int {
         calculator.setCalculator(wonCalculator)
         calculator.setCalculator(dollarCalculator)
         calculator.setCalculator(wonCalculator)
         return calculator.sum(x, y)
     }
+
     @PostMapping("minus")
-    fun minus(@RequestBody req:CalculatorReq): CalculatorRes{
+    fun minus(@RequestBody req: CalculatorReq): CalculatorRes {
         calculator.setCalculator(dollarCalculator)
         val result: Int = calculator.minus(req.x, req.y)
         val res = CalculatorRes()

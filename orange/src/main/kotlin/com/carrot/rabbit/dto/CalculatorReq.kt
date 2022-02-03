@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class CalculatorReq{
+class CalculatorReq {
     var x: Int = 0
     var y: Int = 0
 }

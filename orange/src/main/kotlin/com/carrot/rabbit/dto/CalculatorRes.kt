@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 class CalculatorRes {
-    var result:Int = 0
+    var result: Int = 0
     var response: Body? = null
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     class Body(
-        var resultCode:String = "OK"
-    ){
+        var resultCode: String = "OK"
+    ) {
 
     }
 }

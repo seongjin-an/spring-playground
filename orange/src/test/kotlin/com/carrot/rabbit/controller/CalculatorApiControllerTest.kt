@@ -30,12 +30,12 @@ class CalculatorApiControllerTest {
     private lateinit var mockMvc: MockMvc
 
     @BeforeEach
-    fun init2(){
+    fun init2() {
         Mockito.lenient().`when`(marketApi.connect()).thenReturn(3000)
     }
 
     @Test
-    fun sumTest(){
+    fun sumTest() {
         //http://localhost:8080/api/calculator/sum?x=10&y=20
         mockMvc.perform(
             MockMvcRequestBuilders.get("http://localhost:8080/api/calculator/sum")
@@ -49,7 +49,7 @@ class CalculatorApiControllerTest {
     }
 
     @Test
-    fun minusTest(){
+    fun minusTest() {
         val req = CalculatorReq()
         req.x = 10
         req.y = 10

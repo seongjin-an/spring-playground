@@ -26,12 +26,12 @@ class DollarCalculatorTest {
     private lateinit var calculator: Calculator
 
     @BeforeEach
-    fun init2(){
+    fun init2() {
         Mockito.lenient().`when`(marketApi.connect()).thenReturn(3000)
     }
 
     @Test
-    fun dollarCalculatorTest(){
+    fun dollarCalculatorTest() {
 //        Mockito.`when`(marketApi.connect()).thenReturn(3000)
 //        dollarCalculator.init()
 //        val sum = dollarCalculator.sum(10, 20)

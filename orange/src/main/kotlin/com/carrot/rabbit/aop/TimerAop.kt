@@ -12,16 +12,17 @@ import org.springframework.util.StopWatch
 class TimerAop {
 
     @Pointcut("execution(* com.carrot.rabbit.controller..*.*(..))")
-    private fun cut(){
+    private fun cut() {
 
     }
 
     @Pointcut("@annotation(com.carrot.rabbit.annotation.Timer)")
-    private fun enableTimer(){
+    private fun enableTimer() {
 
     }
+
     @Around("cut() && enableTimer()")
-    fun around(joinPoint: ProceedingJoinPoint){
+    fun around(joinPoint: ProceedingJoinPoint) {
         val stopWatch = StopWatch()
         stopWatch.start()
         val result = joinPoint.proceed()

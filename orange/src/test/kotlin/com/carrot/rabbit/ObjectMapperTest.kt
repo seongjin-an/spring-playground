@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class ObjectMapperTest {
     @Test
-    fun objectMapperTest(){
+    fun objectMapperTest() {
         val objectMapper = ObjectMapper()
         // object -> text, getter!!!
         val user: User = User("ansj", 20)
@@ -16,7 +16,7 @@ class ObjectMapperTest {
         println("text: $text")
 
         // text -> object, constructor!!!
-        val objectUser:User = objectMapper.readValue(text, User::class.java)
+        val objectUser: User = objectMapper.readValue(text, User::class.java)
         println("objectUser: $objectUser")
     }
 }

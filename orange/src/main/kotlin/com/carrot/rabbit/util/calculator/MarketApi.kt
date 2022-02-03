@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class MarketApi {
-    fun connect():Int{
+    fun connect(): Int {
         return 1100
     }
 }

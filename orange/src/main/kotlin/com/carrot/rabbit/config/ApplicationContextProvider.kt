@@ -5,16 +5,16 @@ import org.springframework.context.ApplicationContextAware
 import org.springframework.stereotype.Component
 
 @Component
-class ApplicationContextProvider: ApplicationContextAware {
-    
-    companion object{
+class ApplicationContextProvider : ApplicationContextAware {
+
+    companion object {
         private lateinit var context: ApplicationContext
 
-        public fun getContext(): ApplicationContext{
+        public fun getContext(): ApplicationContext {
             return context
         }
     }
-    
+
     override fun setApplicationContext(applicationContext: ApplicationContext) {
         context = applicationContext
     }

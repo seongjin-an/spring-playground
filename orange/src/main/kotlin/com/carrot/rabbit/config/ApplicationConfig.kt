@@ -12,8 +12,9 @@ class ApplicationConfig {
     fun encoder(base64Encoder: Base64Encoder): Encoder {
         return Encoder(base64Encoder)
     }
+
     @Bean("urlEncoder1")
-    fun encoder(urlEncoder: UrlEncoder): Encoder{
+    fun encoder(urlEncoder: UrlEncoder): Encoder {
         return Encoder(urlEncoder)
     }
 }
