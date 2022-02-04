@@ -1,0 +1,1 @@
+INSERT INTO user(`id`, `name`, `email`, `created_at`, `updated_at`) values(1, 'ansj', 'ansj@abc.com', now(), now());
