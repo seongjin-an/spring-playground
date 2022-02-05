@@ -12,23 +12,14 @@ import javax.persistence.*;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Review extends BaseEntity{
+public class BookAndAuthor extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
-
-    private String content;
-
-    private float score;
-
-    @ManyToOne
-    private User user;
-
     @ManyToOne
     private Book book;
+
+    @ManyToOne
+    private Author author;
 }
