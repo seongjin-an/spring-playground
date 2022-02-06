@@ -19,8 +19,8 @@ public class Review extends BaseEntity{
 
     private String title;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
+//    @Column(name = "user_id", insertable = false, updatable = false)
+//    private Long userId;
 
     private String content;
 
