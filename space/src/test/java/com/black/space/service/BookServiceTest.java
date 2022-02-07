@@ -1,5 +1,6 @@
 package com.black.space.service;
 
+import com.black.space.domain.Book;
 import com.black.space.repository.AuthorRepository;
 import com.black.space.repository.BookRepository;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,18 @@ class BookServiceTest {
         //TransactionAspectSupport
         System.out.println("BOOKS: " + bookRepository.findAll());
         System.out.println("AUTHORS: " + authorRepository.findAll());
+    }
+
+
+    @Test
+    void isolationTest(){
+        Book book = new Book();
+        book.setName("isolation");
+
+        bookRepository.save(book);
+
+        bookService.get(1L);
+
+        System.out.println(">>> " + bookRepository.findAll());
     }
 }
