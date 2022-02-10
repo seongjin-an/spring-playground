@@ -1,0 +1,12 @@
+database:
+  datasource-server:
+    driver-class-name: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/mydb
+    username: postgres
+    password: 1234
+
+  datasource-local:
+    driver-class-name: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: 1234
