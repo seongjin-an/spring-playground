@@ -8,8 +8,6 @@ class Employee (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
-
     var name: String,
-
     var branch: String
 )
