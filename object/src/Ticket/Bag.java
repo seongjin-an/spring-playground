@@ -1,3 +1,5 @@
+package Ticket;
+
 public class Bag {
     private long amount;
     private Invitation invitation;

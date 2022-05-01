@@ -1,3 +1,5 @@
+package Ticket;
+
 public class Ticket {
     private Long fee;
 

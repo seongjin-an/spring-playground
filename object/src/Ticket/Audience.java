@@ -1,3 +1,5 @@
+package Ticket;
+
 public class Audience {
     private Bag bag;
 
