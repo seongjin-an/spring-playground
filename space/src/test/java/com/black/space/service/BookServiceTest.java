@@ -22,8 +22,8 @@ class BookServiceTest {
     @Test
     void transactionTest(){
         try {
-//            bookService.putBookAndAuthor();
-            bookService.put();
+            bookService.putBookAndAuthor();
+//            bookService.put();
         }catch(RuntimeException error){
             System.out.println(">>> " + error.getMessage());
         } catch (Exception e) {

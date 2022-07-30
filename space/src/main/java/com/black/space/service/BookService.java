@@ -32,7 +32,7 @@ public class BookService {
 
         authorRepository.save(author);
 
-        throw new RuntimeException("RUNTIME EXCEPTION");
+        throw new RuntimeException("RUNTIME EXCEPTION");//RuntimeException으로 롤백
 //        throw new Exception("ERROR");
     }
 
