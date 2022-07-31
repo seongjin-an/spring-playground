@@ -7,6 +7,7 @@ import com.black.space.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -44,6 +45,7 @@ public class BookService {
 //        throw new Exception("ERROR");
     }
 
+    //propagation test
     @Transactional
     void putBookAndAuthor2(){
         Book book = new Book();
@@ -58,6 +60,15 @@ public class BookService {
 
         throw new RuntimeException("RUNTIME EXCEPTION");//RuntimeException으로 롤백
 //        throw new Exception("ERROR");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    void propagation(){
+        Book book = new Book();
+        book.setName("JPA JPA");
+
+        bookRepository.save(book);
+//        throw new RuntimeException("RUNTIME EXCEPTION!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     /*

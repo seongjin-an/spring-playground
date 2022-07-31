@@ -7,9 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BookServiceTest {
@@ -29,7 +26,7 @@ class BookServiceTest {
             System.out.println(">>> " + error.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("111");
+            System.out.println("11111111111111");
         }
         //TransactionAspectSupport
         System.out.println("BOOKS: " + bookRepository.findAll());
@@ -48,6 +45,21 @@ class BookServiceTest {
         System.out.println("BOOKS: " + bookRepository.findAll());
         System.out.println("AUTHORS: " + authorRepository.findAll());
     }
+
+    @Test
+    void transactionTest3(){
+        try{
+            bookService.propagation();
+        }catch(RuntimeException error){
+            System.out.println(">>> " + error.getMessage());
+        }catch(Exception error){
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
+
+        System.out.println("BOOKS: " + bookRepository.findAll());
+        System.out.println("AUTHORS: " + authorRepository.findAll());
+    }
+
 
 
     @Test

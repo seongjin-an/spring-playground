@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@DynamicUpdate//isolation READ_UNCOMMITED 일때, 롤백된거 마저 업데이트하는 일 방지
+//@DynamicUpdate//isolation READ_UNCOMMITED 일때, 롤백된거 마저 업데이트하는 일 방지
 public class Book extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
