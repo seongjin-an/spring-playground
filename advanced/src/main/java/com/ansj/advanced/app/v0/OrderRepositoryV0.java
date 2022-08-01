@@ -1,4 +1,4 @@
-package com.ansj.advanced.v0;
+package com.ansj.advanced.app.v0;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
