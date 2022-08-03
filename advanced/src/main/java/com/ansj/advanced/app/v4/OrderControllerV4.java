@@ -13,7 +13,7 @@ public class OrderControllerV4 {
     private final OrderServiceV4 orderService;
     private final LogTrace trace;
 
-    @GetMapping("/v4/request")
+    @GetMapping("/v4/request")//template method pattern!
     public String request(String itemId){
         AbstractTemplate<String> template = new AbstractTemplate<String>(trace) {
             @Override
