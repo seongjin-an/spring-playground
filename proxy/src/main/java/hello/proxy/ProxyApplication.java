@@ -5,6 +5,8 @@ import hello.proxy.config.AppV2Config;
 import hello.proxy.config.LogTraceConfig;
 import hello.proxy.config.v1_proxy.ConcreteProxyConfig;
 import hello.proxy.config.v1_proxy.InterfaceProxyConfig;
+import hello.proxy.config.v2_dynamicproxy.DynamicProxyBasicConfig;
+import hello.proxy.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -12,7 +14,9 @@ import org.springframework.context.annotation.Import;
 //@Import(AppV1Config.class)//클래스를 스프링빈으로 등록한다.
 //@Import({AppV1Config.class, AppV2Config.class})//클래스를 스프링빈으로 등록한다.
 //@Import({LogTraceConfig.class, InterfaceProxyConfig.class})
-@Import({ConcreteProxyConfig.class, LogTraceConfig.class})
+//@Import({ConcreteProxyConfig.class, LogTraceConfig.class})
+//@Import({DynamicProxyBasicConfig.class, LogTraceConfig.class})
+@Import({DynamicProxyFilterConfig.class, LogTraceConfig.class})
 @SpringBootApplication(scanBasePackages = "hello.proxy.app") //주의, scanBasePackages 는 현 모듈 패키지를 스캔
 public class ProxyApplication {
 
