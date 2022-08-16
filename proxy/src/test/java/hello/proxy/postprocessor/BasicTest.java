@@ -20,7 +20,6 @@ public class BasicTest {
 
         //B는 빈으로 등록되지 않는다.
         Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> applicationContext.getBean(B.class));
-
     }
 
     @Slf4j
