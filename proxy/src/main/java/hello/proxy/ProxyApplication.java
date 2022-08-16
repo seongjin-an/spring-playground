@@ -9,6 +9,7 @@ import hello.proxy.config.v2_dynamicproxy.DynamicProxyBasicConfig;
 import hello.proxy.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 import hello.proxy.config.v3_proxyfactory.ProxyFactoryConfigV1;
 import hello.proxy.config.v3_proxyfactory.ProxyFactoryConfigV2;
+import hello.proxy.config.v4_postprocessor.BeanPostProcessorConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -20,7 +21,8 @@ import org.springframework.context.annotation.Import;
 //@Import({DynamicProxyBasicConfig.class, LogTraceConfig.class})
 //@Import({DynamicProxyFilterConfig.class, LogTraceConfig.class})
 //@Import({ProxyFactoryConfigV1.class, LogTraceConfig.class})
-@Import({ProxyFactoryConfigV2.class, LogTraceConfig.class})
+//@Import({ProxyFactoryConfigV2.class, LogTraceConfig.class})
+@Import(BeanPostProcessorConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.proxy.app") //주의, scanBasePackages 는 현 모듈 패키지를 스캔
 public class ProxyApplication {
 
