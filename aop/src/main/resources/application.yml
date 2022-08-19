@@ -1,0 +1,4 @@
+
+spring:
+  aop:
+    proxy-target-class: true #true 로 할 경우 무조건 CGLIB, false 일 경우 jdk 동적 프록시도 사용함
