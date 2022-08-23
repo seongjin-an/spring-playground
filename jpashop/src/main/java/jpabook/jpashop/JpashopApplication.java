@@ -1,13 +1,13 @@
-package com.ansj.bookmanager;
+package jpabook.jpashop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BookmanagerApplication {
+public class JpashopApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BookmanagerApplication.class, args);
+        SpringApplication.run(JpashopApplication.class, args);
     }
 
 }
