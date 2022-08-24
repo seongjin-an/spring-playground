@@ -11,19 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 class MemberRepositoryTest {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberV0Repository memberRepository;
 
     @Test
     @Transactional
     @Rollback(false)
     public void testMember() throws Exception {
         //given
-        Member member = new Member();
+        MemberV0 member = new MemberV0();
         member.setUsername("memberA");
 
         //when
         Long savedId = memberRepository.save(member);
-        Member findMember = memberRepository.find(savedId);
+        MemberV0 findMember = memberRepository.find(savedId);
 
         //then
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
