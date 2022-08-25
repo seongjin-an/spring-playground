@@ -23,4 +23,16 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "item_id")//중간테이블에서 상대 테이블쪽의 외래키 컬럼이다.
     )
     private List<Item> items = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child = new ArrayList<>();
+
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParent(this);
+    }
 }
