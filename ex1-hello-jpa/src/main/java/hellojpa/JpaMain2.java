@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain2 {
     public static void main(String[] args) {
@@ -26,13 +27,33 @@ public class JpaMain2 {
 //            Team findTeam = em.find(Team.class, findTeamId);
 
             //2. 객체지향 모델링(단방향 연관관계)
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Team teamB = new Team();
+//            team.setName("TeamB");
+//            em.persist(teamB);
+//
+//            Member member = new Member();
+//            member.setName("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Member findMember = em.find(Member.class, member.getId());
+//            Team findTeam = findMember.getTeam();
+//            System.out.println("findTeam = " + findTeam.getName());
+//
+////            Team newTeam = em.find(Team.class, teamB.getId());
+//            findMember.setTeam(teamB);
+
+            //3. 객체지향 모델링(양방향 연관관계)
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
-
-            Team teamB = new Team();
-            team.setName("TeamB");
-            em.persist(teamB);
 
             Member member = new Member();
             member.setName("member1");
@@ -43,11 +64,10 @@ public class JpaMain2 {
             em.clear();
 
             Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam = " + findTeam.getName());
-
-//            Team newTeam = em.find(Team.class, teamB.getId());
-            findMember.setTeam(teamB);
+            List<Member> members = findMember.getTeam().getMembers();
+            members.forEach(_member -> {
+                System.out.println("member username: " + _member.getName());
+            });
 
             tx.commit();
         } catch (Exception error) {
