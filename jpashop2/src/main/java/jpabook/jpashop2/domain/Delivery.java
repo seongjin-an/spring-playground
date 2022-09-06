@@ -1,5 +1,7 @@
 package jpabook.jpashop2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +14,8 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 

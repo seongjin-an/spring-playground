@@ -1,5 +1,6 @@
 package jpabook.jpashop2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,13 +22,16 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member; // LAZY 가 설정되었으니, hibernate 가 ByteBuddyInterceptor 라는 프록시를 할당한다.
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;

@@ -1,5 +1,6 @@
 package jpabook.jpashop2.domain.item;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.jpashop2.domain.Category;
 import jpabook.jpashop2.exception.NotEnoughStockException;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 

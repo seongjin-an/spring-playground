@@ -1,6 +1,7 @@
 package jpabook.jpashop2.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,7 @@ public class Member {
     @Embedded
     private Address address;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
