@@ -97,4 +97,18 @@ public class OrderRepository {
         ).getResultList();
         return resultList;
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(// order 가 같은 ID 값이면, 중복을 제거해준다!!(OneToMany 컬렉션 뻥튀기 줄여줌)
+                "select distinct o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d " +
+                        "join fetch o.orderItems oi " +
+                        "join fetch oi.item i",
+                Order.class
+        )
+                .setFirstResult(1)// 일대다 관계에서는 페이징처리가 안됨.(HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!)
+                .setMaxResults(100)
+                .getResultList();
+    }
 }
