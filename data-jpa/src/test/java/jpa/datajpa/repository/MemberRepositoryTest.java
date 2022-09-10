@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +31,8 @@ class MemberRepositoryTest {
     private MemberRepository memberRepository;
     @Autowired
     private TeamRepository teamRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Test
     @DisplayName("회원 테스트(SRPING-DATA-JPA)")
@@ -201,7 +205,7 @@ class MemberRepositoryTest {
         //when
         Page<Member> page = memberRepository.findByAge(age, pageRequest);
 
-        Page<MemberDto> map = page.map(member -> new MemberDto(member.getId(), member.getUsername(), null));
+        page.map(member -> new MemberDto(member.getId(), member.getUsername(), null));
 
         //then
         List<Member> content = page.getContent();
@@ -249,5 +253,88 @@ class MemberRepositoryTest {
 //        assertThat(page.getTotalPages()).isEqualTo(2);
         assertThat(page.isFirst()).isTrue();
         assertThat(page.hasNext()).isTrue();
+    }
+
+    @DisplayName("벌크 수정 처리")
+    @Test
+    public void bulkUpdate() {
+        //given
+        memberRepository.save(new Member("member1", 10));
+        memberRepository.save(new Member("member2", 19));
+        memberRepository.save(new Member("member3", 20));
+        memberRepository.save(new Member("member4", 21));
+        memberRepository.save(new Member("member5", 40));
+
+        //when
+        int resultCount = memberRepository.bulkAgePlus(20);//bulk 연산은 곧바로 DB 로 반영하고 영속석 컨텍스트에는 반영이 안됨.
+        em.flush();
+        em.clear();//또는 @Modifying 애노테이션 clearAutomatically = true 처리를 한다.
+
+        List<Member> member5 = memberRepository.findByUsername("member5");
+        member5.forEach(System.out::println);
+
+        //then
+        assertThat(resultCount).isEqualTo(3);
+    }
+
+    @DisplayName("lazy test")
+    @Test
+    public void findMemberLazy() {
+        //given
+        //member1 -> teamA
+        //member2 -> teamB
+
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member member1 = new Member("member1", 10, teamA);
+        Member member2 = new Member("member2", 10, teamB);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        em.flush();
+        em.clear();
+
+        //when
+//        List<Member> members = memberRepository.findMemberFetchJoin();
+        List<Member> members = memberRepository.findAll();
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+            System.out.println("member = " + member.getTeam().getClass());
+            System.out.println("member.team = " + member.getTeam().getName());
+        }
+    }
+
+    @DisplayName("엔티티 그래프 TEST")
+    @Test
+    public void findEntityGraphByUsernameTest() {
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member member1 = new Member("member1", 10, teamA);
+        Member member2 = new Member("member2", 10, teamB);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        em.flush();
+        em.clear();
+
+        List<Member> members = memberRepository.findEntityGraphByUsername("member1");
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+            System.out.println("member = " + member.getTeam().getClass());
+            System.out.println("member.team = " + member.getTeam().getName());
+        }
+        System.out.println("=====================================+");
+        List<Member> members2 = memberRepository.findNamedEntityGraphByUsername("member2");
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+            System.out.println("member = " + member.getTeam().getClass());
+            System.out.println("member.team = " + member.getTeam().getName());
+        }
     }
 }
