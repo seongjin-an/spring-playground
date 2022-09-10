@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     //메서드 이름으 쿼리 생성
@@ -31,4 +32,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //파라미터 바인딩
     @Query("select m from Member m where m.username in :names")
     List<Member> findByNames(@Param("names") Collection<String> names);
+
+    List<Member> findListByUsername(String username);//컬렉션
+    Member findMemberByUsername(String username);//단건
+    Optional<Member> findOptionalByUsername(String username);//단건 Optional
 }

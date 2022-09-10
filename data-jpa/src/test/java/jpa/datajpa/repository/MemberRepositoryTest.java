@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -158,5 +159,24 @@ class MemberRepositoryTest {
         for (Member member : result) {
             System.out.println("member = " + member);
         }
+    }
+
+    @Test
+    public void returnTypeTest() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<Member> list = memberRepository.findListByUsername("AAA");
+        list.forEach(System.out::println);
+        System.out.println("=============================");
+
+        Member member = memberRepository.findMemberByUsername("AAA");
+        System.out.println("member = " + member);
+        System.out.println("=============================");
+
+        Optional<Member> result = memberRepository.findOptionalByUsername("AAA");
+        result.ifPresent(o -> System.out.println(o));
     }
 }
