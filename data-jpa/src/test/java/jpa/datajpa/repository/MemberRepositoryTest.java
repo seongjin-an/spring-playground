@@ -337,4 +337,39 @@ class MemberRepositoryTest {
             System.out.println("member.team = " + member.getTeam().getName());
         }
     }
+
+    @DisplayName("JPA HINT !! READ ONLY")
+    @Test
+    public void queryHint() {
+        //given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when, 다음과 같이 하면 원본을 따로 유지하는 상황이 발생함 (default)
+//        Member findMember = memberRepository.findById(member1.getId()).get();
+//        findMember.setUsername("member2");
+//        em.flush();
+
+        System.out.println("==========================================================");
+
+        //when, 스냅샷을 따로유지하지 않음.
+        Member findMember2 = memberRepository.findReadOnlyByUsername("member1");
+        findMember2.setUsername("member3");
+        em.flush();
+    }
+
+    @DisplayName("LOCK TEST")
+    @Test
+    public void lock() {
+        //given
+        Member member1 = new Member("member1",10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when
+        List<Member> result = memberRepository.findLockByUsername("member1");
+    }
 }
