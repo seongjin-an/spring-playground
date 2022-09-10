@@ -91,6 +91,7 @@ class MemberJpaRepositoryTest {
         assertThat(result.size()).isEqualTo(1);
     }
 
+    @DisplayName("네임드 쿼리 테스트")
     @Test
     public void testNamedQuery() {
         Member m1 = new Member("AAA", 10);
