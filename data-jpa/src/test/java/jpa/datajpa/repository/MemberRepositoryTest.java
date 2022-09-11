@@ -399,6 +399,7 @@ class MemberRepositoryTest {
         assertThat(result.size()).isEqualTo(1);
     }
 
+    @DisplayName("Query By Example!!!!1")
     @Test
     public void queryByExample() {
         //given
@@ -426,4 +427,93 @@ class MemberRepositoryTest {
 
         assertThat(result.get(0).getUsername()).isEqualTo("m1");
     }//JOIN 이 되기는 하는데 OUTER 조인이 잘 안됨..
+
+
+    @DisplayName("Projection TEST")
+    @Test
+    public void projections() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1", 0, teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnly> result = memberRepository.findProjectionByUsername("m1");
+        for (UsernameOnly usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly.getUsername());//interface만 만들어 두면 spring이 구현체를 만들어줌
+        }
+    }
+
+    @DisplayName("class projection test")
+    @Test
+    public void classProjections() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1", 0, teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnlyDto> result = memberRepository.findClassProjectionByUsername("m1");//단 생성자의 파라미터명과 일치해야함
+        for (UsernameOnlyDto usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly.getUsername());
+        }
+    }
+
+    @DisplayName("generic projection test")
+    @Test
+    public void genericProjections() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1", 0, teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnlyDto> result = memberRepository.findGenericProjectionByUsername("m1", UsernameOnlyDto.class);
+        for (UsernameOnlyDto usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly.getUsername());
+        }
+    }
+
+    @DisplayName("중첩구조처리 test")
+    @Test
+    public void nestedProjections() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1", 0, teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<NestedClosedProjections> result = memberRepository.findGenericProjectionByUsername("m1", NestedClosedProjections.class);
+        for (NestedClosedProjections usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly.getUsername());
+        }
+    }
 }
