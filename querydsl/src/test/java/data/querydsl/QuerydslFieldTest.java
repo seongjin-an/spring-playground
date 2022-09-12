@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class QuerydslFieldTest {
+public class QuerydslFieldTest { // 2
     @PersistenceContext
     EntityManager em;
 
