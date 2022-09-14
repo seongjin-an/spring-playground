@@ -25,4 +25,8 @@ public class Team {
     public Team(String name) {
         this.name = name;
     }
+
+    public List<Member> getMembers() {
+        return members;
+    }
 }

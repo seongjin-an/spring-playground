@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PersonConfig {
     @Bean
-    public Developer<Programming> developer(){
-        Developer<Programming> programmingDeveloper = new Developer<>();
+    public Person<Programming> developer(){
+        Person<Programming> programmingDeveloper = new Developer<>();
         return programmingDeveloper;
     }
 }

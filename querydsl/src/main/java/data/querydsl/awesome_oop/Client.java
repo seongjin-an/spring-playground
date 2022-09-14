@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class Client {
-    private final Developer<Programming> developer;
+    private final Person<Programming> developer;
+    public Client(Person<Programming> developer){
+        this.developer = developer;
+    }
 
     public void client() {
         Programming programming = new ProgrammingImpl();
