@@ -22,6 +22,7 @@ public class InitMember {
     public void init() {
         initMemberService.init();
     }
+
     @Component
     static class InitMemberService {
         @PersistenceContext
